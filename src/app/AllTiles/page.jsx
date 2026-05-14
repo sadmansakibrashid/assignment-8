@@ -1,43 +1,15 @@
-import Link from "next/link";
-
 const getTiles = async () => {
   const res = await fetch("https://tiles-server-292k.onrender.com/tiles", {
    });
  return res.json();
 };
 
-const Home = async () => {
-  const tiles = await getTiles();
-
-  return (
-    <div className="px-6 py-10">
-   <section className="bg-blue-100 py-20 text-center rounded-xl mb-10">
-        <h1 className="text-5xl font-bold mb-6">
-          Discover Your Perfect Aesthetic
-        </h1>
-     <Link href="/AllTiles">
-  <     button className="btn btn-primary">
-        Browse Now
-      </button>
-      </Link>
+const AllTiles = async() => {
+    const tiles = await getTiles();
+    return (
         
-   </section>
-
-      {/* Marquee */}
-      <div className="bg-black text-white py-3 px-4 rounded mb-12 overflow-hidden">
-        <marquee>
-          New Arrivals: Ceramic Blue Tile | Weekly Feature: Modern Geometric
-          Patterns | Join the Community...
-        </marquee>
-      </div>
-
-      <section>
-        <h2 className="text-3xl font-bold mb-8">
-          Featured Tiles ({tiles.length})
-        </h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {tiles.slice(0, 4).map((tile) => (
+          {tiles.map((tile) => (
             <div
               key={tile.id}
               className="border rounded-xl shadow-md overflow-hidden"
@@ -70,10 +42,7 @@ const Home = async () => {
             </div>
           ))}
         </div>
-      </section>
-    </div>
-  );
+    );
 };
 
-export default Home;
-
+export default AllTiles;
