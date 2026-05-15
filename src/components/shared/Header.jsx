@@ -1,9 +1,20 @@
+'use client'
+import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import userAvatar from "@/assets/user.png";
 
 
 const Header = () => {
+
+const { data: session,isPending } = authClient.useSession();
+ 
+   const user = session?.user;
+
+  console.log(user,isPending, "user");
+
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
   <div className="navbar-start">
@@ -36,23 +47,32 @@ const Header = () => {
         </li>
     </ul>
   </div>
-  <div className="navbar-end">
-     <Image
-          src="/user.png"
-          alt="User Avatar"
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-     <Link href={"/login"}>
-     <button className="btn btn-primary">
-          Login
+  {/* <div className="navbar-end"></div> */}
+     {isPending ? (
+        <span className="loading loading-spinner loading-lg"></span>
+      ) : user ? (
+        <div className="navbar-end">
+          <h2>Hello, {user.name}</h2>
+          <Image
+            src={user.image || userAvatar}
+            alt="User avatar"
+            width={60}
+            height={60}
+          />
+          <button
+            className="btn bg-purple-500 text-white"
+            onClick={async () => await authClient.signOut()}
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <button className="btn bg-purple-500 text-white">
+          <Link href={"/login"}>Login</Link>
         </button>
-     </Link>
-        
-  </div>
-</div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Header;

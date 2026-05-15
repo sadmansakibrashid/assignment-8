@@ -25,6 +25,12 @@ const RegisterPage = () => {
       callbackURL: "/",
     });
     console.log(data,error);
+    if(error){
+      alert(error.message)
+    }
+    if(res){
+      alert("signup successful")
+    }
 };
     return (
         <div className="container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100">
