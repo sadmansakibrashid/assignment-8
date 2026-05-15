@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const getTiles = async () => {
   const res = await fetch("https://tiles-server-292k.onrender.com/tiles", {
    });
@@ -14,12 +17,13 @@ const AllTiles = async() => {
               key={tile.id}
               className="border rounded-xl shadow-md overflow-hidden"
             >
-              <img
-                src={tile.image}
-                alt={tile.title}
-                className="w-full h-56 object-cover"
-              />
-
+              <Image
+  src={tile.image}
+  alt={tile.title}
+  width={500}
+  height={300}
+  className="w-full h-56 object-cover"
+/>
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">
                   {tile.title}
@@ -33,11 +37,11 @@ const AllTiles = async() => {
                   ${tile.price}
                 </p>
 
-                <a href={`/tiles/${tile.id}`}>
+                <Link href={`/tiles/${tile.id}`}>
                   <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800">
                     View Details
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           ))}

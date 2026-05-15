@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const getTiles = async () => {
@@ -42,10 +43,12 @@ const Home = async () => {
               key={tile.id}
               className="border rounded-xl shadow-md overflow-hidden"
             >
-              <img
-                src={tile.image}
-                alt={tile.title}
-                className="w-full h-56 object-cover"
+              <Image
+            src={tile.image}
+            alt={tile.title}
+            width={500}
+            height={300}
+            className="w-full h-56 object-cover"
               />
 
               <div className="p-4">
