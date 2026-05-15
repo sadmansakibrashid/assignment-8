@@ -30,11 +30,13 @@ const { data: session,isPending } = authClient.useSession();
           <Link href={"/AllTiles"}>All Tiles</Link>
         </li>
         <li>
-          <Link href={"/"}>My Profile</Link>
+          <Link href={"/my-profile"}>My Profile</Link>
         </li>
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+     <Link href="/" className="text-2xl font-bold">
+          TileHub
+        </Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -43,7 +45,7 @@ const { data: session,isPending } = authClient.useSession();
           <Link href={"/AllTiles"}>All Tiles</Link>
         </li>
         <li>
-          <Link href={"/"}>My Profile</Link>
+          <Link href={"/my-profile"}>My Profile</Link>
         </li>
     </ul>
   </div>
@@ -67,9 +69,11 @@ const { data: session,isPending } = authClient.useSession();
           </button>
         </div>
       ) : (
-        <button className="btn bg-purple-500 text-white">
-          <Link href={"/login"}>Login</Link>
-        </button>
+       <div className="navbar-end">
+    <button className="btn bg-purple-500 text-white">
+      <Link href={"/login"}>Login</Link>
+    </button>
+  </div>
       )}
     </div>
   );

@@ -4,15 +4,26 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
  
 
 const LoginPage = () => {
+  
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
+  const handleGooglesSignin=async()=>{
+     const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log(data,"data");
+  }
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleLoginFunc = async (data) => {
     console.log(data, "data");
@@ -51,13 +62,19 @@ const LoginPage = () => {
           <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
             <input
-              type= "password"
+               type={isShowPassword ? "text" : "password"}
               className="input"
               placeholder="Type here password"
               {...register("password", {
                 required: "Password field is required",
               })}
             />
+            <span
+              className="absolute right-2 top-4 cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <FaEye/> : <FaEyeSlash />}
+            </span>
           
            
           </fieldset>
@@ -65,6 +82,10 @@ const LoginPage = () => {
           <button className="btn w-full bg-slate-800 text-white">Login</button>
         </form>
 
+   <button className="btn border-blue-500 text-blue-500" onClick={handleGooglesSignin}>
+    <FaGoogle></FaGoogle>
+    Login with google
+   </button>
         <p className="mt-4">
           not have an account?{" "}
           <Link href={"/register"} className="text-blue-500">
