@@ -17,15 +17,15 @@ const RegisterPage = () => {
            const data = await authClient.signIn.social({
           provider: "google",
         });
-        console.log(data,"data");
+       
         }
 
-       const [isShowPassword, setIsShowPassword] = useState(false);
+     const [isShowPassword, setIsShowPassword] = useState(false);
       
-    const handleRegisterFunc = async (data) => {
-    console.log(data, "data");
+     const handleRegisterFunc = async (data) => {
+    
      const { email, name, photo, password } = data;
-    console.log(name, photo);
+    
 
      const { data: res, error } = await authClient.signUp.email({
       name: name, // required
@@ -34,7 +34,7 @@ const RegisterPage = () => {
       image: photo,
       callbackURL: "/",
     });
-    console.log(data,error);
+   
     if(error){
       alert(error.message)
     }

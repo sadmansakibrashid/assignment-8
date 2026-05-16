@@ -12,7 +12,7 @@ const getSingleTile = async (id) => {
 const TilesDetailPage =async ({params}) => {
     const {id} = await params;
     const tile = await getSingleTile(id);
-    console.log(tile,"tile")
+    
     return (
         <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
