@@ -3,7 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 
 const RegisterPage = () => {
      const {
@@ -12,6 +12,13 @@ const RegisterPage = () => {
         watch,
         formState: { errors },
       } = useForm();
+
+       const handleGooglesSignin=async()=>{
+           const data = await authClient.signIn.social({
+          provider: "google",
+        });
+        console.log(data,"data");
+        }
 
        const [isShowPassword, setIsShowPassword] = useState(false);
       
@@ -57,6 +64,7 @@ const RegisterPage = () => {
             {errors.name && (
               <p className="text-red-500">{errors.name.message}</p>
             )}
+            
           </fieldset>
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Photo URL</legend>
@@ -108,6 +116,11 @@ const RegisterPage = () => {
           </fieldset>
 
           <button className="btn w-full bg-slate-800 text-white">Register</button>
+
+          <button className="btn border-blue-500 text-blue-500" onClick={handleGooglesSignin}>
+              <FaGoogle></FaGoogle>
+              Login with google
+             </button>
         </form>
 
         

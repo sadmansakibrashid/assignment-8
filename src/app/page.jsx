@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import "animate.css";
+
 const getTiles = async () => {
   const res = await fetch("https://tiles-server-292k.onrender.com/tiles", {
    });
@@ -12,8 +14,8 @@ const Home = async () => {
 
   return (
     <div className="px-6 py-10">
-   <section className="bg-blue-100 py-20 text-center rounded-xl mb-10">
-        <h1 className="text-5xl font-bold mb-6">
+   <section className="bg-blue-100 py-20 text-center rounded-xl mb-10 animate__animated animate__fadeInDown">
+        <h1 className="text-5xl font-bold mb-6 animate__animated animate__bounceIn">
           Discover Your Perfect Aesthetic
         </h1>
      <Link href="/AllTiles">

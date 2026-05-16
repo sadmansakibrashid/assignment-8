@@ -20,13 +20,13 @@ const LoginPage = () => {
      const data = await authClient.signIn.social({
     provider: "google",
   });
-  console.log(data,"data");
+  
   }
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleLoginFunc = async (data) => {
-    console.log(data, "data");
+    
 
      const { data: res, error } = await authClient.signIn.email({
       email: data.email, // required
@@ -34,7 +34,15 @@ const LoginPage = () => {
       rememberMe: true,
       callbackURL: "/",
     });
-    console.log(res, error);
+    if (error) {
+      alert(error.message);
+    }
+    
+
+    if (res) {
+      alert("Signin successful");
+    }
+  
 };
 
   return (
@@ -75,6 +83,9 @@ const LoginPage = () => {
             >
               {isShowPassword ? <FaEye/> : <FaEyeSlash />}
             </span>
+              {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           
            
           </fieldset>
